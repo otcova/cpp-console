@@ -2,20 +2,40 @@
 #include <string>
 #include <vector>
 
-struct V2 {
+struct F2;
+
+struct I2 {
     int x, y;
-    V2();
-    V2(int n);
-    V2(int x, int y);
+    I2();
+    I2(int n);
+    I2(F2 v);
+    I2(int x, int y);
 };
 
-void operator+=(V2& a, const V2& b);
-void operator-=(V2& a, const V2& b);
-V2 operator+(const V2& a, const V2& b);
-V2 operator-(const V2& a, const V2& b);
-bool operator==(const V2& a, const V2& b);
-bool operator!=(const V2& a, const V2& b);
-std::ostream& operator<<(std::ostream& os, const V2& v);
+void operator+=(I2& a, const I2& b);
+void operator-=(I2& a, const I2& b);
+I2 operator+(const I2& a, const I2& b);
+I2 operator-(const I2& a, const I2& b);
+bool operator==(const I2& a, const I2& b);
+bool operator!=(const I2& a, const I2& b);
+std::ostream& operator<<(std::ostream& os, const I2& v);
+
+
+struct F2 {
+    float x, y;
+    F2();
+    F2(float n);
+    F2(I2 v);
+    F2(float x, float y);
+};
+
+void operator+=(F2& a, const F2& b);
+void operator-=(F2& a, const F2& b);
+F2 operator+(const F2& a, const F2& b);
+F2 operator-(const F2& a, const F2& b);
+bool operator==(const F2& a, const F2& b);
+bool operator!=(const F2& a, const F2& b);
+std::ostream& operator<<(std::ostream& os, const F2& v);
 
 struct Color {
     int r, g, b;
@@ -36,11 +56,11 @@ class Canvas {
     std::vector<Pixel> pixels;
 
 public:
-    V2 size;
+    I2 size;
 
-    Canvas(V2 size);
-    Pixel& pixel_at(V2 pos);
-    void set_pixel(V2 pos, Pixel pixel);
+    Canvas(I2 size);
+    Pixel& pixel_at(I2 pos);
+    void set_pixel(I2 pos, Pixel pixel);
     void swap(Canvas& canvas);
 };
 
@@ -52,7 +72,7 @@ public:
     Color color;
     Color background_color;
 
-    Console(V2 size);
+    Console(I2 size);
     Console(int width, int height);
     void render();
 
@@ -61,18 +81,18 @@ public:
     void pause_ms(int milliseconds);
 
     void write(int x, int y, char c);
-    void write(V2 pos, char c);
+    void write(I2 pos, char c);
     void write(int x, int y, int n);
-    void write(V2 pos, int n);
-    void write(int x, int y, V2 v);
-    void write(V2 pos, V2 v);
+    void write(I2 pos, int n);
+    void write(int x, int y, I2 v);
+    void write(I2 pos, I2 v);
     void write(int x, int y, const std::string& text);
-    void write(V2 pos, const std::string& text);
+    void write(I2 pos, const std::string& text);
 
     void fill_rectangle(int x, int y, int width, int height, char c);
-    void fill_rectangle(int x, int y, V2 size, char c);
-    void fill_rectangle(V2 pos, int width, int height, char c);
-    void fill_rectangle(V2 pos, V2 size, char c);
+    void fill_rectangle(int x, int y, I2 size, char c);
+    void fill_rectangle(I2 pos, int width, int height, char c);
+    void fill_rectangle(I2 pos, I2 size, char c);
 
-    V2 size();
+    I2 size();
 };
