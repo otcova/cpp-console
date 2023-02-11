@@ -177,7 +177,7 @@ char Console::get_key() {
 
 
 void Console::write(int x, int y, char c) {
-    write(V2(x, y), x);
+    write(V2(x, y), c);
 }
 
 void Console::write(V2 pos, char c) {
